@@ -9,6 +9,7 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 
 # install modules : GD iconv
 RUN apt-get update && apt-get install -y \
+        procps \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \

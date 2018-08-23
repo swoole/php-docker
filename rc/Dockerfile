@@ -1,4 +1,4 @@
-FROM php:7.0-cli
+FROM php:rc
 
 MAINTAINER twosee <twose@qq.com>
 

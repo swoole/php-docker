@@ -53,7 +53,7 @@ $released_template = file_get_contents(__DIR__ . '/templates/released/Dockerfile
 $tags = [];
 $tags_g = ['7.0', '7.1', '7.2', 'rc'];
 array_walk($tags_g, function ($tag) use (&$tags) {
-    $tags[] = $tag . '-cli';
+    $tags[] = $tag;
     $tags[] = $tag . '-alpine';
 });
 $tags[] = 'latest';

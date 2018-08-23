@@ -164,9 +164,7 @@ COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 ##<custom>##
 # set China timezone
-RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo 'Asia/Shanghai' > /etc/timezone && \
-    echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini
+RUN  echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini
 
 RUN apt-get update && apt-get install -y \
         procps \
@@ -197,8 +195,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     json \
     opcache \
     sockets \
-    pcntl && \
-    echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+    pcntl
 
 #install redis
 RUN pecl install redis && docker-php-ext-enable redis

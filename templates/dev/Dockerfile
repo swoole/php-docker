@@ -1,7 +1,3 @@
-FROM php:7.2-cli
-
-MAINTAINER twosee <twose@qq.com>
-
 # set China timezone
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' > /etc/timezone && \

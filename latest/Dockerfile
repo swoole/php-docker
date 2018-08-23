@@ -7,7 +7,6 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo 'Asia/Shanghai' > /etc/timezone && \
     echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini
 
-# install modules : GD iconv
 RUN apt-get update && apt-get install -y \
         procps \
         libfreetype6-dev \
@@ -26,8 +25,6 @@ RUN apt-get update && apt-get install -y \
         git && \
         apt autoremove && apt clean
 
-# install php pdo_mysql opcache
-# WARNING: Disable opcache-cli if you run you php
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install \
     iconv \

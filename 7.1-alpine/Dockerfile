@@ -1,4 +1,4 @@
-FROM php:7.2-cli
+FROM php:7.1-alpine
 
 MAINTAINER twosee <twose@qq.com>
 

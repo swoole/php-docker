@@ -54,7 +54,6 @@ $tags = [];
 $tags_g = ['7.0', '7.1', '7.2', 'rc'];
 array_walk($tags_g, function ($tag) use (&$tags) {
     $tags[] = $tag;
-    $tags[] = $tag . '-alpine';
 });
 $tags[] = 'latest';
 foreach ($tags as $tag) {
@@ -65,9 +64,9 @@ foreach ($tags as $tag) {
 
 $tags_g = ['7.0', '7.1', '7.2'];
 foreach ($tags_g as $tag) {
-    $alpine_dir = __DIR__ . '/thirdparty/php/' . $tag . '/alpine' . (floatval($tag) <= 7.0 ? '3.7' : '3.8') . '/cli/';
+    $stretch_dir = __DIR__ . '/thirdparty/php/' . $tag . '/stretch/cli/';
     $dev_dir = __DIR__ . '/' . $tag . '-dev/';
-    copy_dir($alpine_dir, $dev_dir);
+    copy_dir($stretch_dir, $dev_dir);
     $content = file_get_contents($dev_dir . '/Dockerfile');
     $content = str_replace("./configure \\\n",
         "./configure \\\n# dev version with memory leak check\n		--enable-debug \\\n", $content);

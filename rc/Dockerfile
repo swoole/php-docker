@@ -2,9 +2,6 @@ FROM php:rc
 
 MAINTAINER twosee <twose@qq.com>
 
-# set China timezone
-RUN echo "[Date]\ndate.timezone=Asia/Shanghai" > /usr/local/etc/php/conf.d/timezone.ini
-
 RUN apt-get update && apt-get install -y \
         procps \
         libfreetype6-dev \
@@ -20,7 +17,8 @@ RUN apt-get update && apt-get install -y \
         wget \
         zip \
         unzip \
-        git && \
+        git \
+        vim && \
         apt autoremove && apt clean
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
@@ -34,7 +32,8 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
     json \
     opcache \
     sockets \
-    pcntl
+    pcntl && \
+    echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 #install redis
 RUN pecl install redis && docker-php-ext-enable redis

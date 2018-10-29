@@ -1,3 +1,0 @@
-[submodule "thirdparty/php"]
-	path = thirdparty/php
-	url = https://github.com/docker-library/php.git

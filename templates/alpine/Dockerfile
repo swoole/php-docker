@@ -5,6 +5,7 @@ MAINTAINER twosee <twose@qq.com>
 # system tools
 RUN apk update && \
     apk add --no-cache \
+    bash \
     curl \
     wget \
     zip \
@@ -15,23 +16,41 @@ RUN apk update && \
 # dependences
 RUN apk add --no-cache \
     autoconf \
-    dpkg-dev \
+    automake \
+    c-ares \
+    c-ares-dev \
     dpkg \
+    dpkg-dev \
     file \
     g++ \
     gcc \
-    libstdc++ \
-    libc-dev \
-    make \
-    pkgconf \
-    re2c \
-    pcre-dev \
-    zlib-dev \
+    git \
+    jemalloc \
+    jemalloc-dev \
     libaio-dev \
+    libc-dev \
+    libev \
+    libev-dev \
+    libgcc \
+    libstdc++ \
+    libtool \
+    make \
     openssl \
     openssl-dev \
-    hiredis \
-    nghttp2
+    pcre-dev \
+    pkgconf \
+    re2c \
+    zlib \
+    zlib-dev && \
+    cd /tmp && \
+    git clone https://github.com/redis/hiredis.git && \
+    cd hiredis && make && make install && \
+    cd /tmp && \
+    git clone https://github.com/nghttp2/nghttp2.git && \
+    cd nghttp2/ && \
+    autoreconf -i && automake && autoconf && ./configure && \
+    make && make install && \
+    cd / && rm -rf /tmp/*
 
 # extensions
 RUN docker-php-ext-install \

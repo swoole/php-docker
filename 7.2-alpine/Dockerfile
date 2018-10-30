@@ -30,7 +30,8 @@ RUN apk add --no-cache \
     libaio-dev \
     openssl \
     openssl-dev \
-    hiredis
+    hiredis \
+    nghttp2
 
 # extensions
 RUN docker-php-ext-install \

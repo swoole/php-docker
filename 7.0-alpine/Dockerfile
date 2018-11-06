@@ -43,13 +43,13 @@ RUN apk add --no-cache \
     zlib \
     zlib-dev && \
     cd /tmp && \
+    git clone https://github.com/redis/hiredis.git && \
+    cd hiredis && make && make install && \
+    cd /tmp && \
     git clone https://github.com/nghttp2/nghttp2.git && \
     cd nghttp2/ && \
     autoreconf -i && automake && autoconf && ./configure && \
     make && make install && \
-    cd /tmp && \
-    git clone https://github.com/redis/hiredis.git && \
-    cd hiredis && make && make install && \
     cd / && rm -rf /tmp/*
 
 # extensions

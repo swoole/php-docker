@@ -57,7 +57,7 @@ foreach ($standard_tags as $tag) {
 
 // generate alpine
 $alpine_template = file_get_contents(__DIR__ . '/templates/alpine/Dockerfile');
-$alpine_tags = ['7.0-alpine', '7.1-alpine', '7.2-alpine'];
+$alpine_tags = ['7.0-alpine', '7.1-alpine', '7.2-alpine', 'rc-alpine'];
 foreach ($alpine_tags as $tag) {
     $content = replace_hook_string($alpine_template, 'tag', $tag);
     @mkdir(__DIR__ . '/' . $tag);

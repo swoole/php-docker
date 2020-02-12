@@ -18,6 +18,7 @@ function copy_dir($src, $dst)
     }
 }
 
+/*
 function curlGet($url)
 {
     $ch = curl_init();
@@ -32,6 +33,7 @@ function curlGet($url)
     curl_close($ch);
     return $output;
 }
+*/
 
 function replace_hook_string(string $string, $from, $to): string
 {

@@ -2,9 +2,10 @@ FROM php:7.0-alpine
 
 MAINTAINER twosee <twose@qq.com>
 
+RUN apk update
+
 # system tools
-RUN apk update && \
-    apk add --no-cache \
+RUN apk add --no-cache \
     bash \
     curl \
     wget \
@@ -41,16 +42,7 @@ RUN apk add --no-cache \
     pkgconf \
     re2c \
     zlib \
-    zlib-dev && \
-    cd /tmp && \
-    git clone https://github.com/redis/hiredis.git && \
-    cd hiredis && make && make install && \
-    cd /tmp && \
-    git clone https://github.com/nghttp2/nghttp2.git && \
-    cd nghttp2/ && \
-    autoreconf -i && automake && autoconf && ./configure && \
-    make && make install && \
-    cd / && rm -rf /tmp/*
+    zlib-dev
 
 # extensions
 RUN docker-php-ext-install \

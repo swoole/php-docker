@@ -4,7 +4,7 @@ MAINTAINER twosee <twose@qq.com>
 
 RUN apk update
 
-# system tools
+# common tools
 RUN apk add --no-cache \
     bash \
     curl \
@@ -14,7 +14,7 @@ RUN apk add --no-cache \
     git \
     vim
 
-# dependences
+# dev tools
 RUN apk add --no-cache \
     autoconf \
     automake \
@@ -25,13 +25,6 @@ RUN apk add --no-cache \
     file \
     g++ \
     gcc \
-    git \
-    jemalloc \
-    jemalloc-dev \
-    libaio-dev \
-    libc-dev \
-    libev \
-    libev-dev \
     libgcc \
     libstdc++ \
     libtool \

@@ -57,4 +57,5 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 # dev tools
 RUN apk add --no-cache \
     gdb \
+    strace \
     valgrind

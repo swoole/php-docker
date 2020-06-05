@@ -43,6 +43,11 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer self-update --clean-backups
 
-# dev-tools for master
-RUN apt-get install -y gdb valgrind && \
-    apt autoremove && apt clean
+# dev-tools
+RUN apt-get install -y \
+    gdb \
+    strace \
+    valgrind
+
+# clean up
+RUN apt autoremove && apt clean

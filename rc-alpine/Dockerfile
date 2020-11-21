@@ -12,8 +12,7 @@ RUN apk add --no-cache \
     zip \
     unzip \
     git \
-    vim \
-    curl-dev
+    vim
 
 # dev tools
 RUN apk add --no-cache \
@@ -36,7 +35,10 @@ RUN apk add --no-cache \
     pkgconf \
     re2c \
     zlib \
-    zlib-dev
+    zlib-dev \
+    libcurl \
+    curl-dev
+
 
 # extensions
 RUN docker-php-ext-install \

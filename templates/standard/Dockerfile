@@ -14,6 +14,7 @@ RUN apt-get install -y \
     libpcre3 \
     libpcre3-dev \
     libonig-dev \
+    libcurl-dev \
     curl \
     wget \
     zip \
@@ -33,7 +34,8 @@ RUN docker-php-ext-install \
     json \
     opcache \
     sockets \
-    pcntl && \
+    pcntl \
+    curl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
     pecl install redis && docker-php-ext-enable redis
 

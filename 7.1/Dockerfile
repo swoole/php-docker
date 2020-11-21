@@ -14,7 +14,7 @@ RUN apt-get install -y \
     libpcre3 \
     libpcre3-dev \
     libonig-dev \
-    libcurl-dev \
+    libcurl4-openssl-dev \
     curl \
     wget \
     zip \

@@ -2,9 +2,9 @@ FROM php:7.4
 
 MAINTAINER twosee <twose@qq.com>
 
-RUN apt-get update
+RUN apt update -y
 
-RUN apt-get install -y \
+RUN apt install -y \
     procps \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -20,9 +20,7 @@ RUN apt-get install -y \
     zip \
     unzip \
     git \
-    vim && \
-    apt autoremove && \
-    apt clean
+    vim
 
 RUN docker-php-ext-install \
     iconv \
@@ -46,7 +44,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     composer self-update --clean-backups
 
 # dev-tools
-RUN apt-get install -y \
+RUN apt install -y \
     gdb \
     strace \
     valgrind

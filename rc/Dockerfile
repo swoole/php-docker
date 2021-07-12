@@ -15,13 +15,13 @@ RUN apt install -y \
     libpcre3-dev \
     libonig-dev \
     libcurl4-openssl-dev \
+    libc-ares-dev \
     curl \
     wget \
     zip \
     unzip \
     git \
-    vim \
-    libc-ares-dev
+    vim
 
 RUN docker-php-ext-install \
     iconv \

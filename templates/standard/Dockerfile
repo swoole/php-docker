@@ -20,7 +20,8 @@ RUN apt install -y \
     zip \
     unzip \
     git \
-    vim
+    vim \
+    libc-ares-dev
 
 RUN docker-php-ext-install \
     iconv \

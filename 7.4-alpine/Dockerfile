@@ -44,11 +44,9 @@ RUN apk add --no-cache \
 RUN docker-php-ext-install \
     pdo_mysql \
     mysqli \
-    json \
     opcache \
     sockets \
-    pcntl \
-    curl && \
+    pcntl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
     pecl install redis && docker-php-ext-enable redis
 

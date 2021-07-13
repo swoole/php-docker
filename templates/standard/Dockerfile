@@ -24,17 +24,12 @@ RUN apt install -y \
     vim
 
 RUN docker-php-ext-install \
-    iconv \
     gd \
     pdo_mysql \
     mysqli \
-    iconv \
-    mbstring \
-    json \
     opcache \
     sockets \
-    pcntl \
-    curl && \
+    pcntl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
     pecl install redis && docker-php-ext-enable redis
 

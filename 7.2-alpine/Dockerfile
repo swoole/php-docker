@@ -1,6 +1,6 @@
 FROM php:7.2-alpine
 
-MAINTAINER twosee <twose@qq.com>
+LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
 

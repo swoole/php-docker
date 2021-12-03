@@ -1,6 +1,6 @@
 FROM php:8.1
 
-MAINTAINER twosee <twose@qq.com>
+LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
 
@@ -15,6 +15,8 @@ RUN apt install -y \
     libpcre3-dev \
     libonig-dev \
     libcurl4-openssl-dev \
+    libc-ares-dev \
+    libpq-dev \
     curl \
     wget \
     zip \
@@ -23,17 +25,12 @@ RUN apt install -y \
     vim
 
 RUN docker-php-ext-install \
-    iconv \
     gd \
     pdo_mysql \
     mysqli \
-    iconv \
-    mbstring \
-    json \
     opcache \
     sockets \
-    pcntl \
-    curl && \
+    pcntl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \
     pecl install redis && docker-php-ext-enable redis
 

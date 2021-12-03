@@ -1,6 +1,6 @@
 FROM php:7.2
 
-MAINTAINER twosee <twose@qq.com>
+LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
 
@@ -16,6 +16,7 @@ RUN apt install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libc-ares-dev \
+    libpq-dev \
     curl \
     wget \
     zip \

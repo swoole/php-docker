@@ -1,6 +1,6 @@
-FROM php:latest-alpine
+FROM php:alpine
 
-MAINTAINER twosee <twose@qq.com>
+LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
 
@@ -37,6 +37,7 @@ RUN apk add --no-cache \
     zlib \
     zlib-dev \
     libcurl \
+    libpq-dev \
     curl-dev
 
 

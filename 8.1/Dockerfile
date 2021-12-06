@@ -16,6 +16,7 @@ RUN apt install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libc-ares-dev \
+    libbrotli-dev \
     libpq-dev \
     curl \
     wget \

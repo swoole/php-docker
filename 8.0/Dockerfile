@@ -25,7 +25,7 @@ RUN apt install -y \
     git \
     vim
 
-RUN docker-php-ext-install \
+RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \

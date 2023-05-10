@@ -12,7 +12,8 @@ RUN apk add --no-cache \
     zip \
     unzip \
     git \
-    vim
+    vim \
+    linux-headers
 
 # dev tools
 RUN apk add --no-cache \

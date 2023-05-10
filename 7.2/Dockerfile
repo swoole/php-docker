@@ -24,7 +24,7 @@ RUN apt install -y \
     git \
     vim
 
-RUN docker-php-ext-install \
+RUN  docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \

@@ -3,7 +3,7 @@
 
 function render($tag, $type)
 {
-    if (version_compare($tag, '8.0', '>=')) {
+    if (version_compare($tag, '8.0', '>=') or $tag == 'rc' or $tag == 'latest') {
         $CFLAGS = 'CFLAGS="$CFLAGS -D_GNU_SOURCE"';
     } else {
         $CFLAGS = '';

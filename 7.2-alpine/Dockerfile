@@ -43,7 +43,7 @@ RUN apk add --no-cache \
 
 
 # extensions
-RUN docker-php-ext-install \
+RUN  docker-php-ext-install \
     pdo_mysql \
     mysqli \
     opcache \

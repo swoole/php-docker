@@ -1,5 +1,4 @@
 FROM php:8.2-alpine
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
@@ -12,7 +11,8 @@ RUN apk add --no-cache \
     zip \
     unzip \
     git \
-    vim
+    vim \
+    linux-headers
 
 # dev tools
 RUN apk add --no-cache \
@@ -31,13 +31,14 @@ RUN apk add --no-cache \
     make \
     openssl \
     openssl-dev \
+    brotli-dev \
     pcre-dev \
     pkgconf \
     re2c \
     zlib \
     zlib-dev \
     libcurl \
-    libpq-dev \
+    libpq \
     curl-dev
 
 

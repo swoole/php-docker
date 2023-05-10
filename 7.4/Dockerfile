@@ -1,5 +1,4 @@
 FROM php:7.4
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
@@ -25,7 +24,7 @@ RUN apt install -y \
     git \
     vim
 
-RUN docker-php-ext-install \
+RUN  docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \

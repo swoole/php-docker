@@ -1,50 +1,28 @@
 #!/usr/bin/env php
 <?php
-function copy_dir($src, $dst)
+
+function render($tag, $type)
 {
-    if (is_link($src)) {
-        symlink(readlink($src), $dst);
-    } elseif (is_dir($src)) {
-        @mkdir($dst);
-        foreach (scandir($src) as $file) {
-            if ($file != '.' && $file != '..') {
-                copy_dir("$src/$file", "$dst/$file");
-            }
-        }
-    } elseif (is_file($src)) {
-        copy($src, $dst);
+    if (version_compare($tag, '8.0', '>=')) {
+        $CFLAGS = 'CFLAGS="$CFLAGS -D_GNU_SOURCE"';
     } else {
-        echo "WARNING: Cannot copy $src (unknown file type)\n";
+        $CFLAGS = '';
     }
-}
-
-function replace_hook_string(string $string, $from, $to): string
-{
-    $walk = function (&$value) {
-        $value = "{{{$value}}}";
-    };
-    if (is_string($from)) {
-        $from = "{{{$from}}}";
-    } elseif (is_array($from)) {
-        array_walk($from, $walk);
+    ob_start();
+    include __DIR__ . '/templates/' . $type . '.php';
+    $content = ob_get_clean();
+    if (!is_dir(__DIR__ . '/' . $tag)) {
+        mkdir(__DIR__ . '/' . $tag);
     }
-    return str_replace($from, $to, $string);
-}
-
-// generate standard
-$standard_template = file_get_contents(__DIR__ . '/templates/standard/Dockerfile');
-$standard_tags = ['7.2', '7.3', '7.4', '8.0', '8.1', 'rc', 'latest'];
-foreach ($standard_tags as $tag) {
-    $content = replace_hook_string($standard_template, 'tag', $tag);
-    @mkdir(__DIR__ . '/' . $tag);
     file_put_contents(__DIR__ . '/' . $tag . '/Dockerfile', $content);
 }
 
-// generate alpine
-$alpine_template = file_get_contents(__DIR__ . '/templates/alpine/Dockerfile');
+$debian_tags = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', 'rc', 'latest'];
+foreach ($debian_tags as $tag) {
+    render($tag, 'debian');
+}
+
 $alpine_tags = ['7.2-alpine', '7.3-alpine', '7.4-alpine', '8.0-alpine', '8.1-alpine', 'rc-alpine', 'alpine'];
 foreach ($alpine_tags as $tag) {
-    $content = replace_hook_string($alpine_template, 'tag', $tag);
-    @mkdir(__DIR__ . '/' . $tag);
-    file_put_contents(__DIR__ . '/' . $tag . '/Dockerfile', $content);
+    render($tag, 'alpine');
 }

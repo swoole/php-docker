@@ -1,5 +1,4 @@
 FROM php:latest
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
@@ -16,6 +15,7 @@ RUN apt install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libc-ares-dev \
+    libbrotli-dev \
     libpq-dev \
     curl \
     wget \
@@ -24,7 +24,7 @@ RUN apt install -y \
     git \
     vim
 
-RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
+RUN  docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \

@@ -1,5 +1,4 @@
 FROM php:8.2
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y

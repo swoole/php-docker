@@ -1,5 +1,4 @@
 FROM php:alpine
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
@@ -31,6 +30,7 @@ RUN apk add --no-cache \
     make \
     openssl \
     openssl-dev \
+    brotli-dev \
     pcre-dev \
     pkgconf \
     re2c \
@@ -42,7 +42,7 @@ RUN apk add --no-cache \
 
 
 # extensions
-RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
+RUN docker-php-ext-install \
     pdo_mysql \
     mysqli \
     opcache \

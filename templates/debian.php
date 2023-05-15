@@ -18,6 +18,7 @@ RUN apt install -y \
     libc-ares-dev \
     libbrotli-dev \
     libpq-dev \
+    unixodbc-dev \
     curl \
     wget \
     zip \

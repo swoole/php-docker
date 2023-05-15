@@ -9,13 +9,16 @@ function render($tag, $type)
     } else {
         $CFLAGS = '';
     }
+
     ob_start();
     include __DIR__ . '/templates/' . $type . '.php';
     $content = ob_get_clean();
-    if (!is_dir(__DIR__ . '/' . $tag)) {
-        mkdir(__DIR__ . '/' . $tag);
+    $dockerFile = __DIR__ . '/' . $tag . '/Dockerfile';
+
+    if (!is_dir(dirname($dockerFile))) {
+        mkdir(dirname($dockerFile));
     }
-    file_put_contents(__DIR__ . '/' . $tag . '/Dockerfile', $content);
+    file_put_contents($dockerFile, $content);
 }
 
 $debian_tags = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', 'rc', 'latest'];

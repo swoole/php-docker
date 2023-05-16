@@ -15,9 +15,20 @@ function render($version, $type)
 
     $alpine = str_contains($version, 'alpine');
     if (!$alpine) {
-        $tag = $version === 'latest' ? debian_version : $version . '-' . debian_version;
+        // 7.2 does not have bullseye
+        if ($version === '7.2') {
+            $tag = $version;
+        } elseif ($version === 'rc' or $version == 'latest') {
+            $tag = debian_version;
+        } else {
+            $tag = $version . '-' . debian_version;
+        }
     } else {
-        $tag = $version . alpine_version;
+        if (version_compare($v, '8.1', '>=')) {
+            $tag = $version . alpine_version;
+        } else {
+            $tag = $version;
+        }
     }
 
     ob_start();

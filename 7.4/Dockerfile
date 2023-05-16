@@ -18,6 +18,7 @@ RUN apt install -y \
     libbrotli-dev \
     libpq-dev \
     unixodbc-dev \
+    odbc-mariadb \
     curl \
     wget \
     zip \

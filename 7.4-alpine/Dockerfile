@@ -40,7 +40,8 @@ RUN apk add --no-cache \
     libcurl \
     libpq \
     curl-dev \
-    unixodbc-dev
+    unixodbc-dev \
+    odbc-mariadb
 
 # extensions
 RUN  docker-php-ext-install \

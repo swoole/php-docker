@@ -40,8 +40,10 @@ RUN apk add --no-cache \
     zlib-dev \
     libcurl \
     libpq \
-    curl-dev \
-    unixodbc-dev
+<?php if (version_compare($v, '8.0', '>=')): ?>
+    unixodbc-dev \
+<?php endif; ?>
+    curl-dev
 
 # extensions
 RUN <?=$CFLAGS?> docker-php-ext-install \

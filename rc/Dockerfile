@@ -17,8 +17,6 @@ RUN apt install -y \
     libc-ares-dev \
     libbrotli-dev \
     libpq-dev \
-    unixodbc-dev \
-    odbc-mariadb \
     curl \
     wget \
     zip \

@@ -18,8 +18,10 @@ RUN apt install -y \
     libc-ares-dev \
     libbrotli-dev \
     libpq-dev \
+<?php if (version_compare($v, '8.0', '>=')): ?>
     unixodbc-dev \
     odbc-mariadb \
+<?php endif; ?>
     curl \
     wget \
     zip \

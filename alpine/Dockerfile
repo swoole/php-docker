@@ -39,8 +39,7 @@ RUN apk add --no-cache \
     zlib-dev \
     libcurl \
     libpq \
-    curl-dev \
-    unixodbc-dev
+    curl-dev
 
 # extensions
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \

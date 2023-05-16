@@ -1,4 +1,5 @@
-FROM php:8.2-alpine
+FROM php:8.2-alpine3.18
+
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
@@ -40,8 +41,7 @@ RUN apk add --no-cache \
     libcurl \
     libpq \
     curl-dev \
-    unixodbc-dev \
-    odbc-mariadb
+    unixodbc-dev
 
 # extensions
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \

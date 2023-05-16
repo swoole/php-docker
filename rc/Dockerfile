@@ -1,4 +1,5 @@
-FROM php:rc
+FROM php:rc-bullseye
+
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y

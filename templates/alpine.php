@@ -1,4 +1,4 @@
-FROM php:<?=$tag?>
+FROM php:<?=$tag?>3.18
 
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
@@ -41,8 +41,7 @@ RUN apk add --no-cache \
     libcurl \
     libpq \
     curl-dev \
-    unixodbc-dev \
-    odbc-mariadb
+    unixodbc-dev
 
 # extensions
 RUN <?=$CFLAGS?> docker-php-ext-install \

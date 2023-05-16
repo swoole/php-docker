@@ -1,5 +1,4 @@
 FROM php:8.0-bullseye
-
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y

@@ -1,4 +1,4 @@
-FROM php:<?=$tag?>3.18
+FROM php:<?=$tag?>
 
 LABEL maintainer="Swoole Team <team@swoole.com>"
 

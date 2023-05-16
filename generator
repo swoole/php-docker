@@ -1,19 +1,29 @@
 #!/usr/bin/env php
 <?php
 
-function render($tag, $type)
+const alpine_version = '3.18';
+const debian_version = 'bullseye';
+
+function render($version, $type)
 {
-    $v = strstr($tag, '-', true) ?: $tag;
+    $v = strstr($version, '-', true) ?: $version;
     if (version_compare($v, '8.0', '>=') or $v == 'rc' or $v == 'latest' or $v == 'alpine') {
         $CFLAGS = 'CFLAGS="$CFLAGS -D_GNU_SOURCE"';
     } else {
         $CFLAGS = '';
     }
 
+    $alpine = str_contains($version, 'alpine');
+    if (!$alpine) {
+        $tag = $version === 'latest' ? debian_version : $version . '-' . debian_version;
+    } else {
+        $tag = $version . alpine_version;
+    }
+
     ob_start();
     include __DIR__ . '/templates/' . $type . '.php';
     $content = ob_get_clean();
-    $dockerFile = __DIR__ . '/' . $tag . '/Dockerfile';
+    $dockerFile = __DIR__ . '/' . $version . '/Dockerfile';
 
     if (!is_dir(dirname($dockerFile))) {
         mkdir(dirname($dockerFile));
@@ -21,12 +31,12 @@ function render($tag, $type)
     file_put_contents($dockerFile, $content);
 }
 
-$debian_tags = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', 'rc', 'latest'];
-foreach ($debian_tags as $tag) {
-    render($tag, 'debian');
+$debian_versions = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', 'rc', 'latest'];
+foreach ($debian_versions as $v) {
+    render($v, 'debian');
 }
 
-$alpine_tags = ['7.2-alpine', '7.3-alpine', '7.4-alpine', '8.0-alpine', '8.1-alpine', '8.2-alpine', 'rc-alpine', 'alpine'];
-foreach ($alpine_tags as $tag) {
-    render($tag, 'alpine');
+$alpine_versions = ['7.2-alpine', '7.3-alpine', '7.4-alpine', '8.0-alpine', '8.1-alpine', '8.2-alpine', 'rc-alpine', 'alpine'];
+foreach ($alpine_versions as $v) {
+    render($v, 'alpine');
 }

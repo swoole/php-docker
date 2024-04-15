@@ -42,12 +42,12 @@ function render($version, $type)
     file_put_contents($dockerFile, $content);
 }
 
-$debian_versions = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', 'rc', 'latest'];
+$debian_versions = ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', 'rc', 'latest'];
 foreach ($debian_versions as $v) {
     render($v, 'debian');
 }
 
-$alpine_versions = ['7.2-alpine', '7.3-alpine', '7.4-alpine', '8.0-alpine', '8.1-alpine', '8.2-alpine', 'rc-alpine', 'alpine'];
+$alpine_versions = ['7.2-alpine', '7.3-alpine', '7.4-alpine', '8.0-alpine', '8.1-alpine', '8.2-alpine', '8.3-alpine', 'rc-alpine', 'alpine'];
 foreach ($alpine_versions as $v) {
     render($v, 'alpine');
 }

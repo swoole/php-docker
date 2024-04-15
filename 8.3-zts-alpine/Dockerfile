@@ -1,4 +1,4 @@
-FROM php:7.3-alpine
+FROM php:8.3-zts-alpine3.18
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update
@@ -39,10 +39,11 @@ RUN apk add --no-cache \
     zlib-dev \
     libcurl \
     libpq \
+    unixodbc-dev \
     curl-dev
 
 # extensions
-RUN  docker-php-ext-install \
+RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     pdo_mysql \
     mysqli \
     opcache \

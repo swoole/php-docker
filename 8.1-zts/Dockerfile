@@ -1,4 +1,4 @@
-FROM php:7.3-bullseye
+FROM php:8.1-zts-bullseye
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
@@ -17,6 +17,8 @@ RUN apt install -y \
     libc-ares-dev \
     libbrotli-dev \
     libpq-dev \
+    unixodbc-dev \
+    odbc-mariadb \
     curl \
     wget \
     zip \
@@ -24,7 +26,7 @@ RUN apt install -y \
     git \
     vim
 
-RUN  docker-php-ext-install \
+RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \

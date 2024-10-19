@@ -4,60 +4,65 @@
 const alpine_version = '3.18';
 const debian_version = 'bullseye';
 
-function render($version, $type)
+class DockerfileGenerator
 {
-    $v = strstr($version, '-', true) ?: $version;
-    if (version_compare($v, '8.0', '>=') or $v == 'rc' or $v == 'latest' or $v == 'alpine') {
+    protected $debian_versions = ['8.1', '8.2', '8.3', '8.4'];
+    protected $alpine_versions = ['8.1-alpine', '8.2-alpine', '8.3-alpine', '8.4-alpine'];
+    protected $alpine_zts_versions = ['8.1-zts-alpine', '8.2-zts-alpine', '8.3-zts-alpine', '8.4-zts-alpine'];
+    protected $debian_zts_versions = ['8.1-zts', '8.2-zts', '8.3-zts', '8.4-zts'];
+
+    protected $baseImageTag = [
+        '8.4' => '8.4.0RC2-bullseye',
+        '8.4-zts' => '8.4.0RC2-zts-bullseye',
+        '8.4-alpine' => '8.4.0RC2-alpine3.20',
+        '8.4-zts-alpine' => '8.4.0RC2-zts-alpine3.20',
+    ];
+
+    private function render($version, $type)
+    {
+        $v = strstr($version, '-', true) ?: $version;
         $CFLAGS = 'CFLAGS="$CFLAGS -D_GNU_SOURCE"';
-    } else {
-        $CFLAGS = '';
-    }
 
-    $alpine = str_contains($version, 'alpine');
-    if (!$alpine) {
-        // 7.2 does not have bullseye
-        if ($version === '7.2') {
-            $tag = $version;
-        } elseif ($version === 'rc' or $version == 'latest') {
-            $tag = debian_version;
+        $alpine = str_contains($version, 'alpine');
+
+        if (isset($this->baseImageTag[$version])) {
+            $tag = $this->baseImageTag[$version];
         } else {
-            $tag = $version . '-' . debian_version;
+            if (!$alpine) {
+                $tag = $version . '-' . debian_version;
+            } else {
+                $tag = $version . alpine_version;
+            }
         }
-    } else {
-        if (version_compare($v, '8.1', '>=')) {
-            $tag = $version . alpine_version;
-        } else {
-            $tag = $version;
+
+        ob_start();
+        include __DIR__ . '/templates/' . $type . '.php';
+        $content = ob_get_clean();
+        $dockerFile = __DIR__ . '/' . $version . '/Dockerfile';
+
+        if (!is_dir(dirname($dockerFile))) {
+            mkdir(dirname($dockerFile));
         }
+        file_put_contents($dockerFile, $content);
     }
 
-    ob_start();
-    include __DIR__ . '/templates/' . $type . '.php';
-    $content = ob_get_clean();
-    $dockerFile = __DIR__ . '/' . $version . '/Dockerfile';
+    public function make()
+    {
+        foreach ($this->debian_versions as $v) {
+            $this->render($v, 'debian');
+        }
+        foreach ($this->alpine_versions as $v) {
+            $this->render($v, 'alpine');
+        }
+        foreach ($this->debian_zts_versions as $v) {
+            $this->render($v, 'debian');
+        }
+        foreach ($this->alpine_zts_versions as $v) {
+            $this->render($v, 'alpine');
+        }
 
-    if (!is_dir(dirname($dockerFile))) {
-        mkdir(dirname($dockerFile));
+        echo "Generate Dockerfile Success!\n";
     }
-    file_put_contents($dockerFile, $content);
 }
 
-$debian_versions = ['8.1', '8.2', '8.3', 'rc', 'latest'];
-foreach ($debian_versions as $v) {
-    render($v, 'debian');
-}
-
-$alpine_versions = ['8.1-alpine', '8.2-alpine', '8.3-alpine', 'rc-alpine', 'alpine'];
-foreach ($alpine_versions as $v) {
-    render($v, 'alpine');
-}
-
-$debian_zts_versions = ['8.1-zts', '8.2-zts', '8.3-zts'];
-foreach ($debian_zts_versions as $v) {
-    render($v, 'debian');
-}
-
-$alpine_zts_versions = ['8.1-zts-alpine', '8.2-zts-alpine', '8.3-zts-alpine'];
-foreach ($alpine_zts_versions as $v) {
-    render($v, 'alpine');
-}
+(new DockerfileGenerator())->make();

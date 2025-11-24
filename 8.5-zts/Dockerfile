@@ -30,7 +30,6 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \
-    opcache \
     sockets \
     pcntl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \

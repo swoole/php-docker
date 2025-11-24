@@ -33,7 +33,9 @@ RUN <?=$CFLAGS?> docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \
+<?php if (version_compare($v, '8.5', '<')): ?>
     opcache \
+<?php endif; ?>
     sockets \
     pcntl && \
     echo "opcache.enable_cli=1" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini && \

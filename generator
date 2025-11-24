@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-const alpine_version = '3.22';
+const alpine_version = '3.21';
 const debian_version = 'bookworm';
 
 class DockerfileGenerator

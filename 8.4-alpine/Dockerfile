@@ -1,4 +1,4 @@
-FROM php:8.4.0RC2-alpine3.20
+FROM php:8.4-alpine3.20
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apk update

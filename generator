@@ -1,24 +1,18 @@
 #!/usr/bin/env php
 <?php
 
-const alpine_version = '3.18';
-const debian_version = 'bullseye';
+const alpine_version = '3.20';
+const debian_version = 'bookworm';
 
 class DockerfileGenerator
 {
-    protected $debian_versions = ['8.1', '8.2', '8.3', '8.4'];
-    protected $alpine_versions = ['8.1-alpine', '8.2-alpine', '8.3-alpine', '8.4-alpine'];
-    protected $alpine_zts_versions = ['8.1-zts-alpine', '8.2-zts-alpine', '8.3-zts-alpine', '8.4-zts-alpine'];
-    protected $debian_zts_versions = ['8.1-zts', '8.2-zts', '8.3-zts', '8.4-zts'];
+    protected array $debian_versions = ['8.1', '8.2', '8.3', '8.4', '8.5'];
+    protected array $alpine_versions = ['8.1-alpine', '8.2-alpine', '8.3-alpine', '8.4-alpine', '8.5-alpine'];
+    protected array $alpine_zts_versions = ['8.1-zts-alpine', '8.2-zts-alpine', '8.3-zts-alpine', '8.4-zts-alpine', '8.5-zts-alpine'];
+    protected array $debian_zts_versions = ['8.1-zts', '8.2-zts', '8.3-zts', '8.4-zts', '8.5-zts'];
+    protected array $baseImageTag = [];
 
-    protected $baseImageTag = [
-        '8.4' => '8.4.0RC2-bullseye',
-        '8.4-zts' => '8.4.0RC2-zts-bullseye',
-        '8.4-alpine' => '8.4.0RC2-alpine3.20',
-        '8.4-zts-alpine' => '8.4.0RC2-zts-alpine3.20',
-    ];
-
-    private function render($version, $type)
+    private function render($version, $type): void
     {
         $v = strstr($version, '-', true) ?: $version;
         $CFLAGS = 'CFLAGS="$CFLAGS -D_GNU_SOURCE"';
@@ -46,7 +40,7 @@ class DockerfileGenerator
         file_put_contents($dockerFile, $content);
     }
 
-    public function make()
+    public function make(): void
     {
         foreach ($this->debian_versions as $v) {
             $this->render($v, 'debian');

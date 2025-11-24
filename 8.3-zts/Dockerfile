@@ -1,4 +1,4 @@
-FROM php:8.3-zts-bullseye
+FROM php:8.3-zts-bookworm
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y

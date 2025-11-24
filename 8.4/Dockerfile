@@ -1,4 +1,4 @@
-FROM php:8.4.0RC2-bullseye
+FROM php:8.4-bookworm
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y

@@ -4,6 +4,15 @@ Only for development and CI environments, integrated compiler, header files, deb
 
 The size of the image is too large, do not use it in a production environment
 
+## base images
+
+Debian images use the official `php:<version>-trixie` and
+`php:<version>-zts-trixie` images for PHP 8.2 through 8.5. libcurl and other
+system libraries come from Debian Trixie packages.
+
+PHP 8.1 Debian builds are retired because official Trixie images are unavailable.
+Alpine images remain available for Alpine compatibility testing.
+
 
 ## generate Dockerfile
 ```php

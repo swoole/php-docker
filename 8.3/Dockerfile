@@ -1,17 +1,16 @@
-FROM php:8.3-bookworm
+FROM php:8.3-trixie
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
 
 RUN apt install -y \
     procps \
-    libfreetype6-dev \
+    libfreetype-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
     openssl \
     libssh-dev \
-    libpcre3 \
-    libpcre3-dev \
+    libpcre2-dev \
     libonig-dev \
     libcurl4-openssl-dev \
     libc-ares-dev \
@@ -37,7 +36,7 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     pecl install redis && docker-php-ext-enable redis
 
 # install composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer self-update --clean-backups

@@ -2,14 +2,14 @@
 <?php
 
 const alpine_version = '3.21';
-const debian_version = 'bookworm';
+const debian_version = 'trixie';
 
 class DockerfileGenerator
 {
-    protected array $debian_versions = ['8.1', '8.2', '8.3', '8.4', '8.5'];
+    protected array $debian_versions = ['8.2', '8.3', '8.4', '8.5'];
     protected array $alpine_versions = ['8.1-alpine', '8.2-alpine', '8.3-alpine', '8.4-alpine', '8.5-alpine'];
     protected array $alpine_zts_versions = ['8.1-zts-alpine', '8.2-zts-alpine', '8.3-zts-alpine', '8.4-zts-alpine', '8.5-zts-alpine'];
-    protected array $debian_zts_versions = ['8.1-zts', '8.2-zts', '8.3-zts', '8.4-zts', '8.5-zts'];
+    protected array $debian_zts_versions = ['8.2-zts', '8.3-zts', '8.4-zts', '8.5-zts'];
     protected array $baseImageTag = [];
 
     private function render($version, $type): void

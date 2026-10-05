@@ -1,17 +1,16 @@
-FROM php:8.4-bookworm
+FROM php:8.4-trixie
 LABEL maintainer="Swoole Team <team@swoole.com>"
 
 RUN apt update -y
 
 RUN apt install -y \
     procps \
-    libfreetype6-dev \
+    libfreetype-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
     openssl \
     libssh-dev \
-    libpcre3 \
-    libpcre3-dev \
+    libpcre2-dev \
     libonig-dev \
     libcurl4-openssl-dev \
     libc-ares-dev \

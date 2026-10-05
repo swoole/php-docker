@@ -35,7 +35,7 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     pecl install redis && docker-php-ext-enable redis
 
 # install composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     composer self-update --clean-backups

@@ -49,6 +49,7 @@ RUN apk add --no-cache \
 RUN <?=$CFLAGS?> docker-php-ext-install \
     pdo_mysql \
     mysqli \
+    bcmath \
 <?php if (version_compare($v, '8.5', '<')): ?>
     opcache \
 <?php endif; ?>

@@ -32,6 +32,7 @@ RUN <?=$CFLAGS?> docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \
+    bcmath \
 <?php if (version_compare($v, '8.5', '<')): ?>
     opcache \
 <?php endif; ?>

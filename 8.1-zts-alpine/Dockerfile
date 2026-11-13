@@ -46,6 +46,7 @@ RUN apk add --no-cache \
 RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     pdo_mysql \
     mysqli \
+    bcmath \
     opcache \
     sockets \
     pcntl && \

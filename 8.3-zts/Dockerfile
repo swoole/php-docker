@@ -29,6 +29,7 @@ RUN CFLAGS="$CFLAGS -D_GNU_SOURCE" docker-php-ext-install \
     gd \
     pdo_mysql \
     mysqli \
+    bcmath \
     opcache \
     sockets \
     pcntl && \
